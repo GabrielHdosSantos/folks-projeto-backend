@@ -11,6 +11,7 @@ import java.util.List;
 
 @RequestMapping("/teacher")
 @RestController
+@CrossOrigin(origins = "*")
 public class TeacherController {
 
     @Autowired
