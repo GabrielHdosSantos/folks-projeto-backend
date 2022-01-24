@@ -1,5 +1,6 @@
 package br.com.folks.english.model;
 
+import br.com.folks.english.enums.Days;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,9 @@ public class ClassRoom implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String book;
-    private LocalDate date;
+
+    @Enumerated(EnumType.STRING)
+    private Days days;
     private String hour;
 
     @ManyToOne
@@ -31,12 +34,17 @@ public class ClassRoom implements Serializable {
     @JsonIgnore
     private List<Student> students;
 
-    public ClassRoom(String book, LocalDate date, String hour, Teacher teacher, List<Student> students) {
+    @OneToMany(mappedBy = "classRoom")
+    private List<Notes> anotations;
+
+    public ClassRoom(Long id, String book, Days days, String hour, Teacher teacher, List<Student> students, List<Notes> anotations) {
+        this.id = id;
         this.book = book;
-        this.date = date;
+        this.days = days;
         this.hour = hour;
         this.teacher = teacher;
         this.students = students;
+        this.anotations = anotations;
     }
 
     @Deprecated

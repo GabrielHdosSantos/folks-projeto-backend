@@ -22,4 +22,5 @@ public interface ClassRoomRepo extends JpaRepository<ClassRoom, Long> {
             "join class_room cr on cr.teacher_id = t.id", nativeQuery = true)
     List<Tuple> findAllClass();
 
+
 }
