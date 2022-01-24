@@ -42,9 +42,4 @@ public class TeacherController {
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTeacher(Long id){
-        service.deleteTeacher(id);
-    }
-
 }
