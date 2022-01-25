@@ -1,5 +1,6 @@
 package br.com.folks.english.controller;
 
+import br.com.folks.english.dto.ClassRoomDTO;
 import br.com.folks.english.model.ClassRoom;
 import br.com.folks.english.service.ClassRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 @RequestMapping("/class")
@@ -30,8 +32,8 @@ public class ClassRoomController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<ClassRoom>> all() {
-        List<ClassRoom> classRooms = service.all();
+    public ResponseEntity<List<ClassRoomDTO>> all() {
+        List<ClassRoomDTO> classRooms = service.all();
         return new ResponseEntity<>(classRooms, HttpStatus.OK);
     }
 
@@ -49,5 +51,13 @@ public class ClassRoomController {
         return new ResponseEntity<>(newClassRoom, HttpStatus.OK);
 
     }
+
+    @GetMapping("/class/{id}")
+    public ResponseEntity<List<ClassRoomDTO>> findClassTeacher(@PathVariable("id") Long id) {
+        List<ClassRoomDTO> result = service.findTeacherClass(id);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }
