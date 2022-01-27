@@ -1,5 +1,7 @@
 package br.com.folks.english.dto;
 
+import br.com.folks.english.model.ClassRoom;
+
 public class ClassRoomDTO {
 
     public Object teacherNome;
@@ -16,4 +18,5 @@ public class ClassRoomDTO {
     }
 
     public ClassRoomDTO(){}
+
 }

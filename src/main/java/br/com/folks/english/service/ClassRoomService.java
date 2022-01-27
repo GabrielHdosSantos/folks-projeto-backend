@@ -2,16 +2,20 @@ package br.com.folks.english.service;
 
 import br.com.folks.english.dto.ClassRoomDTO;
 import br.com.folks.english.model.ClassRoom;
+import br.com.folks.english.model.Student;
 import br.com.folks.english.model.Teacher;
 import br.com.folks.english.repo.ClassRoomRepo;
+import br.com.folks.english.repo.StudentRepo;
 import br.com.folks.english.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.ValueRef;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,6 +26,9 @@ public class ClassRoomService {
 
     @Autowired
     private TeacherRepo teacherRepo;
+
+    @Autowired
+    private StudentRepo studentRepo;
 
     public ClassRoom addClass(ClassRoom classRoom) {
         return repo.save(classRoom);
@@ -36,9 +43,9 @@ public class ClassRoomService {
     public List<ClassRoomDTO> all() {
         List<Tuple> result = repo.findAllClass();
         List<ClassRoomDTO> classes = new ArrayList<>();
-           for (Tuple value: result){
+        for (Tuple value : result) {
             ClassRoomDTO classRoomDTO = new ClassRoomDTO(value.get(0), value.get(1), value.get(2), value.get(3));
-               classes.add(classRoomDTO);
+            classes.add(classRoomDTO);
 
         }
         return classes;
@@ -67,6 +74,21 @@ public class ClassRoomService {
 
     }
 
+
+    public ClassRoom assignClassToStudent(Long idClass, Long idStudent) {
+
+        List<Student> students = new ArrayList<>();
+
+        ClassRoom newClass = repo.getById(idClass);
+        Student student = studentRepo.getById(idStudent);
+        student.setClassRoom(newClass);
+        students.add(student);
+        newClass.setStudents(students);
+
+        return newClass;
+
+    }
+
     public List<ClassRoomDTO> findTeacherClass(Long id) {
 
 
@@ -79,6 +101,20 @@ public class ClassRoomService {
 
         }
         return classRoomDTOS;
+
+    }
+
+    public Optional<List<ClassRoom>> findStudentClass(Long id) {
+
+        Optional<List<ClassRoom>> lista = repo.findByStudentsId(id);
+
+        if (Optional.of(lista).isPresent()) {
+            return lista;
+        } else {
+            //passar exception
+            return null;
+        }
+
 
     }
 

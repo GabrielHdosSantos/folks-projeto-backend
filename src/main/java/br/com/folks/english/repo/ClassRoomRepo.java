@@ -1,5 +1,6 @@
 package br.com.folks.english.repo;
 
+import br.com.folks.english.dto.ClassRoomDTO;
 import br.com.folks.english.model.ClassRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Tuple;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClassRoomRepo extends JpaRepository<ClassRoom, Long> {
@@ -22,5 +24,6 @@ public interface ClassRoomRepo extends JpaRepository<ClassRoom, Long> {
             "join class_room cr on cr.teacher_id = t.id", nativeQuery = true)
     List<Tuple> findAllClass();
 
+    Optional<List<ClassRoom>> findByStudentsId(Long id);
 
 }

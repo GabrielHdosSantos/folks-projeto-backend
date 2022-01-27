@@ -1,18 +1,17 @@
 package br.com.folks.english.model;
 
+import br.com.folks.english.enums.InfosP;
+import jdk.jfr.BooleanFlag;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
-public class Admin implements Serializable {
+public class Admin extends User implements Serializable {
 
     private static final long SerialVersionUID = 1L;
 
@@ -23,18 +22,23 @@ public class Admin implements Serializable {
     private String secondName;
     private int age;
     private String email;
-    private String password;
     private String cpf;
-    private boolean isActive;
 
-    public Admin(String name, String secondName, int age, String email, String password, String cpf, boolean isActive) {
+    @BooleanFlag
+    private boolean ativo;
+
+    @Enumerated(EnumType.STRING)
+    private InfosP orientation;
+
+    public Admin(String login, String password, String name, String secondName, int age, String email, String cpf, boolean ativo, InfosP orientation) {
+        super(login, password);
         this.name = name;
         this.secondName = secondName;
         this.age = age;
         this.email = email;
-        this.password = password;
         this.cpf = cpf;
-        this.isActive = isActive;
+        this.ativo = ativo;
+        this.orientation = orientation;
     }
 
     @Deprecated

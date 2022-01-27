@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Tuple;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/class")
 @RestController
@@ -52,9 +53,25 @@ public class ClassRoomController {
 
     }
 
+    @PatchMapping("class/{idclass}/student/{idstudent}")
+    public ResponseEntity<ClassRoom> assignClassToStudent(@PathVariable("idclass") Long idclass, @PathVariable("idstudent") Long idteacher) {
+
+        ClassRoom newClassRoom = service.assignClassToStudent(idclass, idteacher);
+
+        return new ResponseEntity<>(newClassRoom, HttpStatus.OK);
+
+    }
+
     @GetMapping("/class/{id}")
     public ResponseEntity<List<ClassRoomDTO>> findClassTeacher(@PathVariable("id") Long id) {
         List<ClassRoomDTO> result = service.findTeacherClass(id);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/student/{id}")
+    public ResponseEntity<Optional<List<ClassRoom>>> findStudentClass(@PathVariable("id") Long id){
+        Optional<List<ClassRoom>> result = service.findStudentClass(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
