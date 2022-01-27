@@ -1,7 +1,9 @@
 package br.com.folks.english.controller;
 
 import br.com.folks.english.dto.ClassRoomDTO;
+import br.com.folks.english.dto.StudentDTO;
 import br.com.folks.english.model.ClassRoom;
+import br.com.folks.english.model.Student;
 import br.com.folks.english.service.ClassRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +64,7 @@ public class ClassRoomController {
 
     }
 
-    @GetMapping("/class/{id}")
+    @GetMapping("/teacher/class/{id}")
     public ResponseEntity<List<ClassRoomDTO>> findClassTeacher(@PathVariable("id") Long id) {
         List<ClassRoomDTO> result = service.findTeacherClass(id);
 
@@ -70,8 +72,16 @@ public class ClassRoomController {
     }
 
     @GetMapping("/student/{id}")
-    public ResponseEntity<Optional<List<ClassRoom>>> findStudentClass(@PathVariable("id") Long id){
+    public ResponseEntity<Optional<List<ClassRoom>>> findStudentClass(@PathVariable("id") Long id) {
         Optional<List<ClassRoom>> result = service.findStudentClass(id);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/all/student/{id}")
+    public ResponseEntity<List<StudentDTO>> findAllStudentsByClass(@PathVariable("id") Long id) {
+
+        List<StudentDTO> result = service.findClassStudents(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

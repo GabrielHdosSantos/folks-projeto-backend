@@ -25,6 +25,7 @@ public class ClassRoom implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Days days;
+
     private String hour;
 
     @ManyToOne

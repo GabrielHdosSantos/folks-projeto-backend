@@ -1,6 +1,7 @@
 package br.com.folks.english.service;
 
 import br.com.folks.english.dto.ClassRoomDTO;
+import br.com.folks.english.dto.StudentDTO;
 import br.com.folks.english.model.ClassRoom;
 import br.com.folks.english.model.Student;
 import br.com.folks.english.model.Teacher;
@@ -9,6 +10,8 @@ import br.com.folks.english.repo.StudentRepo;
 import br.com.folks.english.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.ValueRef;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Tuple;
@@ -114,6 +117,23 @@ public class ClassRoomService {
             //passar exception
             return null;
         }
+
+    }
+
+    public List<StudentDTO> findClassStudents(Long id) {
+
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        List<Tuple> resultSet = repo.findAllClassStudents(id);
+
+        for (Tuple value : resultSet) {
+
+            StudentDTO studentDTO = new StudentDTO(value.get(0), value.get(1), value.get(2), value.get(3));
+            studentDTOS.add(studentDTO);
+
+        }
+
+
+        return studentDTOS;
 
 
     }
