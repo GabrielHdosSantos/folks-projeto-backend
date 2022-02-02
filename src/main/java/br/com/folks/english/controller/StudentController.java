@@ -11,7 +11,6 @@ import java.util.List;
 
 @RequestMapping("/student")
 @RestController
-@CrossOrigin(origins = "*")
 public class StudentController {
 
     @Autowired
@@ -38,14 +37,14 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> findById(Long id) {
+    public ResponseEntity<Student> findById(@PathVariable("id") Long id) {
         Student student = service.findById(id);
 
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent(Long id){
+    public void deleteStudent(@PathVariable("id") Long id){
         service.deleteStudent(id);
     }
 }

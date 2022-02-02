@@ -4,9 +4,11 @@ import br.com.folks.english.enums.InfosP;
 import jdk.jfr.BooleanFlag;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Getter

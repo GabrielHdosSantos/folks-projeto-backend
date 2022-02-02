@@ -12,7 +12,6 @@ import java.util.List;
 
 @RequestMapping("/admin")
 @RestController
-@CrossOrigin(origins = "*")
 public class AdminController {
 
     @Autowired
@@ -46,7 +45,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAdmin(@PathVariable Long id) {
+    public void deleteAdmin(@PathVariable("id") Long id) {
 
         adminService.deleteAdmin(id);
     }

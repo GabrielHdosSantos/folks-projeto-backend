@@ -3,6 +3,7 @@ package br.com.folks.english.service;
 import br.com.folks.english.model.Admin;
 import br.com.folks.english.repo.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

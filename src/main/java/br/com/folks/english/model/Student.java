@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.BooleanFlag;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -33,8 +35,9 @@ public class Student extends User implements Serializable {
     @BooleanFlag
     private boolean ativo;
 
-    public Student(String login, String password, String name, String secondName, int age, String email, String cpf, String identification, InfosP orientation, ClassRoom classRoom, boolean ativo) {
-        super(login, password);
+    public Student(Long id, String streetName, int number, String description, String login, String password, Long id1, String name, String secondName, int age, String email, String cpf, String identification, InfosP orientation, ClassRoom classRoom, boolean ativo) {
+        super(id, streetName, number, description, login, password);
+        this.id = id1;
         this.name = name;
         this.secondName = secondName;
         this.age = age;
@@ -49,6 +52,5 @@ public class Student extends User implements Serializable {
     @Deprecated
     public Student() {
     }
-
 
 }

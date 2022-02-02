@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @RequestMapping("/class")
 @RestController
-@CrossOrigin(origins = "*")
 public class ClassRoomController {
 
     @Autowired
@@ -29,7 +28,7 @@ public class ClassRoomController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ClassRoom> updateClass(@RequestBody ClassRoom classRoom, @PathVariable("") Long id) {
+    public ResponseEntity<ClassRoom> updateClass(@RequestBody ClassRoom classRoom, @PathVariable("id") Long id) {
         ClassRoom newClass = service.updateClass(classRoom, id);
         return new ResponseEntity<>(newClass, HttpStatus.OK);
     }

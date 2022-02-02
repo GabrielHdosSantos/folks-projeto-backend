@@ -39,7 +39,7 @@ public class NotesController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Notes> update(@RequestBody Notes notes, Long id) {
+    public ResponseEntity<Notes> update(@RequestBody Notes notes, @PathVariable("id") Long id) {
         Notes newNotes = service.updateNotes(notes, id);
 
         return new ResponseEntity<>(newNotes, HttpStatus.OK);
