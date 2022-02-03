@@ -22,6 +22,8 @@ public abstract class User extends Adress implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
+
+
     private String password;
 
     public User( String login, String password) {

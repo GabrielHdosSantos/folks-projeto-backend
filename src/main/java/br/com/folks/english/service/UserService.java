@@ -7,9 +7,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -28,10 +31,13 @@ public class UserService implements UserDetailsService {
             return repo.findUserByLogin(username);
     }
 
-    public User login(String username, String password) {
-        return repo.findUserByLoginAndPassword(username, password);
+    public User login(String username) {
+
+        User user = repo.findUserByLogin(username);
+
+        return user;
 
     }
-
-
 }
+
+
