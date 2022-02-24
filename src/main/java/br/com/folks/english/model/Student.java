@@ -3,6 +3,7 @@ package br.com.folks.english.model;
 import br.com.folks.english.enums.InfosP;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.BooleanFlag;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,10 +11,12 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 public class Student extends User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +32,9 @@ public class Student extends User implements Serializable {
     private String identification;
     @Enumerated(EnumType.STRING)
     private InfosP orientation;
+
+    @OneToMany(mappedBy = "student")
+    private List<SchoolNotes> schoolNotes;
 
     @ManyToOne
     private ClassRoom classRoom;

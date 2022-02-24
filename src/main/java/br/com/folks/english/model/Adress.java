@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -19,8 +22,13 @@ public class Adress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome da rua não pode ser vazio")
+    @NotEmpty(message = "O nome deve ser preenchido!")
     private String streetName;
+
+    @NotNull
     private int number;
+
     private String description;
 
     public Adress(Long id, String streetName, int number, String description) {
