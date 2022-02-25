@@ -36,6 +36,9 @@ public class Student extends User implements Serializable {
     @OneToMany(mappedBy = "student")
     private List<SchoolNotes> schoolNotes;
 
+    @OneToMany(mappedBy = "student")
+    private List<RepositionClasses> repositionClasses;
+
     @ManyToOne
     private ClassRoom classRoom;
     @BooleanFlag
