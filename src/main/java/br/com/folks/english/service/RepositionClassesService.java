@@ -10,6 +10,7 @@ import br.com.folks.english.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -28,7 +29,20 @@ public class RepositionClassesService {
     private TeacherRepo teacherRepo;
 
 
-    public RepositionClasses addReposition(RepositionClasses repositionClasses, Long idStudent, Long idTeacher) {
+    public List<RepositionResultSet> findRepositionByClassDate(
+            String date) {
+
+        List<RepositionResultSet> payload = repo.findRepositionClassesByClassDate(date);
+
+        return payload;
+
+    }
+
+    public RepositionClasses addReposition(
+            RepositionClasses repositionClasses,
+            Long idStudent,
+            Long idTeacher) {
+
         List<RepositionClasses> list = new ArrayList<>();
 
         Student student = studentRepo.getById(idStudent);
@@ -51,7 +65,9 @@ public class RepositionClassesService {
 
     }
 
-    public RepositionClasses update(RepositionClasses repositionClasses, Long id) {
+    public RepositionClasses update(
+            RepositionClasses repositionClasses,
+            Long id) {
 
         repositionClasses.setId(id);
 

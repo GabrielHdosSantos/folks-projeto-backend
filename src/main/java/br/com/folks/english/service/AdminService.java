@@ -26,10 +26,12 @@ public class AdminService {
     }
 
     public List<Admin> all() {
+
         return repo.findAll();
     }
 
     public Admin findByid(Long id){
+
         return repo.getById(id);
     }
 
