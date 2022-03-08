@@ -1,4 +1,4 @@
-package br.com.folks.english.dto;
+package br.com.folks.english.resultSets;
 
 import br.com.folks.english.model.SchoolNotes;
 import lombok.AllArgsConstructor;

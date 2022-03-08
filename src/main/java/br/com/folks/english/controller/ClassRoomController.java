@@ -22,65 +22,95 @@ public class ClassRoomController {
     private ClassRoomService service;
 
     @PostMapping
-    public ResponseEntity<ClassRoom> addClass(@RequestBody ClassRoom classRoom) {
-        ClassRoom newClass = service.addClass(classRoom);
+    public ResponseEntity<ClassRoom> addClass(
+            @RequestBody ClassRoom classRoom) {
+
+        ClassRoom newClass =
+                service.addClass(classRoom);
+
         return new ResponseEntity<>(newClass, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ClassRoom> updateClass(@RequestBody ClassRoom classRoom, @PathVariable("id") Long id) {
-        ClassRoom newClass = service.updateClass(classRoom, id);
+    public ResponseEntity<ClassRoom> updateClass(
+            @RequestBody ClassRoom classRoom,
+            @PathVariable("id") Long id) {
+
+        ClassRoom newClass =
+                service.updateClass(classRoom, id);
+
         return new ResponseEntity<>(newClass, HttpStatus.OK);
     }
 
     @GetMapping()
     public ResponseEntity<List<ClassRoomDTO>> all() {
-        List<ClassRoomDTO> classRooms = service.all();
+
+        List<ClassRoomDTO> classRooms =
+                service.all();
+
         return new ResponseEntity<>(classRooms, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClassRoom> findById(@PathVariable("id") Long id) {
-        ClassRoom newClass = service.findById(id);
+    public ResponseEntity<ClassRoom> findById(
+            @PathVariable("id") Long id) {
+
+        ClassRoom newClass =
+                service.findById(id);
+
         return new ResponseEntity<>(newClass, HttpStatus.OK);
     }
 
     @PatchMapping("class/{idclass}/teacher/{idteacher}")
-    public ResponseEntity<ClassRoom> assignClassToTeacher(@PathVariable("idclass") Long idclass, @PathVariable("idteacher") Long idteacher) {
+    public ResponseEntity<ClassRoom> assignClassToTeacher(
+            @PathVariable("idclass") Long idclass,
+            @PathVariable("idteacher") Long idteacher) {
 
-        ClassRoom newClassRoom = service.assignClassToTeacher(idclass, idteacher);
+        ClassRoom newClassRoom =
+                service.assignClassToTeacher(idclass, idteacher);
 
         return new ResponseEntity<>(newClassRoom, HttpStatus.OK);
 
     }
 
     @PatchMapping("class/{idclass}/student/{idstudent}")
-    public ResponseEntity<ClassRoom> assignClassToStudent(@PathVariable("idclass") Long idclass, @PathVariable("idstudent") Long idteacher) {
+    public ResponseEntity<ClassRoom> assignClassToStudent(
+            @PathVariable("idclass") Long idclass,
+            @PathVariable("idstudent") Long idteacher) {
 
-        ClassRoom newClassRoom = service.assignClassToStudent(idclass, idteacher);
+        ClassRoom newClassRoom =
+                service.assignClassToStudent(idclass, idteacher);
 
         return new ResponseEntity<>(newClassRoom, HttpStatus.OK);
 
     }
 
     @GetMapping("/teacher/class/{id}")
-    public ResponseEntity<List<ClassRoomDTO>> findClassTeacher(@PathVariable("id") Long id) {
-        List<ClassRoomDTO> result = service.findTeacherClass(id);
+    public ResponseEntity<List<ClassRoomDTO>> findClassTeacher(
+            @PathVariable("id") Long id) {
+
+        List<ClassRoomDTO> result =
+                service.findTeacherClass(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/student/{id}")
-    public ResponseEntity<Optional<List<ClassRoom>>> findStudentClass(@PathVariable("id") Long id) {
-        Optional<List<ClassRoom>> result = service.findStudentClass(id);
+    public ResponseEntity<Optional<List<ClassRoom>>> findStudentClass(
+            @PathVariable("id") Long id) {
+
+        Optional<List<ClassRoom>> result =
+                service.findStudentClass(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/all/student/{id}")
-    public ResponseEntity<List<StudentDTO>> findAllStudentsByClass(@PathVariable("id") Long id) {
+    public ResponseEntity<List<StudentDTO>> findAllStudentsByClass(
+            @PathVariable("id") Long id) {
 
-        List<StudentDTO> result = service.findClassStudents(id);
+        List<StudentDTO> result =
+                service.findClassStudents(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

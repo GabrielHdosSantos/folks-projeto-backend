@@ -1,5 +1,6 @@
 package br.com.folks.english.controller;
 
+import br.com.folks.english.resultSets.RepositionResultSet;
 import br.com.folks.english.model.RepositionClasses;
 import br.com.folks.english.service.RepositionClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +18,47 @@ public class RepositionClassesController {
     private RepositionClassesService service;
 
     @PostMapping("student/{idStudent}/teacher/{idTeacher}")
-    public ResponseEntity<RepositionClasses> addReposition(@RequestBody RepositionClasses repositionClasses, @PathVariable Long idStudent, @PathVariable Long idTeacher) {
+    public ResponseEntity<RepositionClasses> addReposition(
+            @RequestBody RepositionClasses repositionClasses,
+            @PathVariable Long idStudent,
+            @PathVariable Long idTeacher) {
 
-        RepositionClasses obj = service.addReposition(repositionClasses, idStudent, idTeacher);
+        RepositionClasses obj =
+                service.addReposition(repositionClasses, idStudent, idTeacher);
 
         return new ResponseEntity<>(obj, HttpStatus.CREATED);
 
     }
 
-    @PatchMapping("{id}")
-    public ResponseEntity<RepositionClasses> updateReposition(@RequestBody RepositionClasses repositionClasses, @PathVariable Long id) {
+    @PatchMapping("update/{id}")
+    public ResponseEntity<RepositionClasses> updateReposition(
+            @RequestBody RepositionClasses repositionClasses,
+            @PathVariable Long id) {
 
-        RepositionClasses obj = service.update(repositionClasses, id);
+        RepositionClasses obj =
+                service.update(repositionClasses, id);
 
         return new ResponseEntity<>(obj, HttpStatus.OK);
 
     }
 
-    @GetMapping("{idStudent}")
-    public ResponseEntity<List<RepositionClasses>> findStudentRepositon(@PathVariable Long idStudent) {
+    @GetMapping("student/{idStudent}")
+    public ResponseEntity<List<RepositionResultSet>> findStudentRepositon(
+            @PathVariable Long idStudent) {
 
-        List<RepositionClasses> list = service.repositionClassesList(idStudent);
+        List<RepositionResultSet> list =
+                service.repositionStudentList(idStudent);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+
+    }
+
+    @GetMapping("teacher/{idTeacher}")
+    public ResponseEntity<List<RepositionResultSet>> findTeacherRepositon(
+            @PathVariable Long idTeacher) {
+
+        List<RepositionResultSet> list =
+                service.repositionTeacherList(idTeacher);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
 

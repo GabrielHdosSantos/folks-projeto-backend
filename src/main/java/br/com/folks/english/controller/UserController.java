@@ -21,11 +21,11 @@ public class UserController {
     private UserRepo repo;
 
     @GetMapping("/login")
-    public ResponseEntity<User> login(@RequestParam("username") String username) {
+    public ResponseEntity<User> login(
+            @RequestParam("username") String username) {
 
-
-
-        User user = service.login(username);
+        User user =
+                service.login(username);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -33,7 +33,8 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getAll() {
 
-        List<User> lista = repo.findAll();
+        List<User> lista =
+                repo.findAll();
 
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }

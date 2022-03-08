@@ -18,34 +18,48 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping
-    public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
-        Admin newAdmin = adminService.addAdmin(admin);
+    public ResponseEntity<Admin> addAdmin(
+            @RequestBody Admin admin) {
+
+        Admin newAdmin =
+                adminService.addAdmin(admin);
 
         return new ResponseEntity<>(newAdmin, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin, @PathVariable("id") Long id) {
-        Admin patchValue = adminService.updateAdmin(admin, id);
+    public ResponseEntity<Admin> updateAdmin(
+            @RequestBody Admin admin,
+            @PathVariable("id") Long id) {
+
+        Admin patchValue =
+                adminService.updateAdmin(admin, id);
 
         return new ResponseEntity<>(patchValue, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<Admin>> all() {
-        List<Admin> admins = adminService.all();
+
+        List<Admin> admins =
+                adminService.all();
+
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Admin> findById(@PathVariable("id") Long id) {
-        Admin admin = adminService.findByid(id);
+    public ResponseEntity<Admin> findById(
+            @PathVariable("id") Long id) {
+
+        Admin admin =
+                adminService.findByid(id);
 
         return new ResponseEntity<>(admin, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAdmin(@PathVariable("id") Long id) {
+    public void deleteAdmin(
+            @PathVariable("id") Long id) {
 
         adminService.deleteAdmin(id);
     }

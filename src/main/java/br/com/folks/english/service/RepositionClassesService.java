@@ -1,5 +1,6 @@
 package br.com.folks.english.service;
 
+import br.com.folks.english.resultSets.RepositionResultSet;
 import br.com.folks.english.model.RepositionClasses;
 import br.com.folks.english.model.Student;
 import br.com.folks.english.model.Teacher;
@@ -25,6 +26,7 @@ public class RepositionClassesService {
 
     @Autowired
     private TeacherRepo teacherRepo;
+
 
     public RepositionClasses addReposition(RepositionClasses repositionClasses, Long idStudent, Long idTeacher) {
         List<RepositionClasses> list = new ArrayList<>();
@@ -57,8 +59,19 @@ public class RepositionClassesService {
 
     }
 
-    public List<RepositionClasses> repositionClassesList(Long id) {
-        List<RepositionClasses> list = repo.findByStudent_id(id);
+    public List<RepositionResultSet> repositionStudentList(Long id) {
+
+
+        List<RepositionResultSet> list = repo.findByStudent_id(id);
+
+        return list;
+
+    }
+
+    public List<RepositionResultSet> repositionTeacherList(Long id) {
+
+
+        List<RepositionResultSet> list = repo.findByTeacher_id(id);
 
         return list;
 

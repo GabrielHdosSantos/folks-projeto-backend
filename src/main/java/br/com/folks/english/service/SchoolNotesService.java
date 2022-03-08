@@ -1,6 +1,6 @@
 package br.com.folks.english.service;
 
-import br.com.folks.english.dto.SchoolNotesDto;
+import br.com.folks.english.resultSets.SchoolNotesDto;
 import br.com.folks.english.model.SchoolNotes;
 import br.com.folks.english.model.Student;
 import br.com.folks.english.repo.SchoolNotesRepo;

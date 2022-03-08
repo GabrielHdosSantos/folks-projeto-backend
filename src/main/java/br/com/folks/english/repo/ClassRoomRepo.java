@@ -16,19 +16,24 @@ import java.util.Optional;
 @Repository
 public interface ClassRoomRepo extends JpaRepository<ClassRoom, Long> {
 
-    @Query(value = "SELECT t.name, cr.book, cr.days, cr.hour \n" +
+    @Query(value = "" +
+            "SELECT t.name, cr.book, cr.days, cr.hour \n" +
             "FROM teacher t\n" +
-            "join class_room cr on cr.teacher_id = t.id where teacher_id = :id", nativeQuery = true)
+            "JOIN class_room cr on cr.teacher_id = t.id " +
+            "WHERE teacher_id = :id", nativeQuery = true)
     List<Tuple> findClassTeacher(@Param("id") Long id);
 
-    @Query(value = "SELECT t.name, cr.book, cr.days, cr.hour \n" +
+    @Query(value = "" +
+            "SELECT t.name, cr.book, cr.days, cr.hour \n" +
             "FROM teacher t\n" +
-            "join class_room cr on cr.teacher_id = t.id", nativeQuery = true)
+            "JOIN class_room cr on cr.teacher_id = t.id", nativeQuery = true)
     List<Tuple> findAllClass();
 
     Optional<List<ClassRoom>> findByStudentsId(Long id);
 
-    @Query(value = "select s.name as \"nome\", s.age, s.ativo, s.cpf from student s where class_room_id = :id", nativeQuery = true)
+    @Query(value = "SELECT s.name as \"nome\", s.age, s.ativo, s.cpf " +
+            "FROM student s" +
+            "WHERE class_room_id = :id", nativeQuery = true)
     List<Tuple> findAllClassStudents(Long id);
 
 
