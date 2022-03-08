@@ -2,8 +2,10 @@ package br.com.folks.english.service;
 
 import br.com.folks.english.model.RepositionClasses;
 import br.com.folks.english.model.Student;
+import br.com.folks.english.model.Teacher;
 import br.com.folks.english.repo.RepositionClassesRepo;
 import br.com.folks.english.repo.StudentRepo;
+import br.com.folks.english.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +23,27 @@ public class RepositionClassesService {
     @Autowired
     private StudentRepo studentRepo;
 
-    public RepositionClasses addReposition(RepositionClasses repositionClasses, Long id) {
+    @Autowired
+    private TeacherRepo teacherRepo;
+
+    public RepositionClasses addReposition(RepositionClasses repositionClasses, Long idStudent, Long idTeacher) {
         List<RepositionClasses> list = new ArrayList<>();
 
+        Student student = studentRepo.getById(idStudent);
+        Teacher teacher = teacherRepo.getById(idTeacher);
 
-        Student student = studentRepo.getById(id);
         repositionClasses.setStudent(student);
+        repositionClasses.setTeacher(teacher);
+
+
         list.add(repositionClasses);
+
         student.setRepositionClasses(list);
+        teacher.setRepositionClasses(list);
+
+
         studentRepo.save(student);
+        teacherRepo.save(teacher);
 
         return repo.save(repositionClasses);
 

@@ -35,6 +35,9 @@ public class Teacher extends User implements Serializable {
     @JsonIgnore
     private List<ClassRoom> classRoomList;
 
+    @OneToMany(mappedBy = "teacher")
+    private List<RepositionClasses> repositionClasses;
+
     @BooleanFlag
     private boolean ativo;
 

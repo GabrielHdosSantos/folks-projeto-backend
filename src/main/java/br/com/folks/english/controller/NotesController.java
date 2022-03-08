@@ -21,7 +21,6 @@ public class NotesController {
     @Autowired
     private NotesService service;
 
-
     @PostMapping("/{id}")
     public ResponseEntity<Notes> add(@RequestBody Notes notes, @PathVariable("id") Long id) {
         Notes newObj = service.add(notes, id);

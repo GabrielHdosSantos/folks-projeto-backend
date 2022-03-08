@@ -1,5 +1,6 @@
 package br.com.folks.english.controller;
 
+import br.com.folks.english.dto.SchoolNotesDto;
 import br.com.folks.english.model.SchoolNotes;
 import br.com.folks.english.model.Student;
 import br.com.folks.english.service.SchoolNotesService;
@@ -30,9 +31,9 @@ public class SchoolNotesController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<List<SchoolNotes>> listStudentNotes(@PathVariable Long id) {
+    public ResponseEntity<List<SchoolNotesDto>> listStudentNotes(@PathVariable Long id) {
 
-        List<SchoolNotes> list = service.findStudentNotes(id);
+        List<SchoolNotesDto> list = service.findStudentNotes(id);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
 

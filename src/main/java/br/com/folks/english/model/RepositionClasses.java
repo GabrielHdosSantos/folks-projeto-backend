@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,12 +25,16 @@ public class RepositionClasses implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate classDate;
 
     @ManyToOne
     @JsonIgnore
     private Student student;
+
+    @ManyToOne
+    @JsonIgnore
+    private Teacher teacher;
 
 
 }

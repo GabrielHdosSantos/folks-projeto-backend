@@ -16,10 +16,10 @@ public class RepositionClassesController {
     @Autowired
     private RepositionClassesService service;
 
-    @PostMapping("{idStudent}")
-    public ResponseEntity<RepositionClasses> addReposition(@RequestBody RepositionClasses repositionClasses, @PathVariable Long idStudent) {
+    @PostMapping("student/{idStudent}/teacher/{idTeacher}")
+    public ResponseEntity<RepositionClasses> addReposition(@RequestBody RepositionClasses repositionClasses, @PathVariable Long idStudent, @PathVariable Long idTeacher) {
 
-        RepositionClasses obj = service.addReposition(repositionClasses, idStudent);
+        RepositionClasses obj = service.addReposition(repositionClasses, idStudent, idTeacher);
 
         return new ResponseEntity<>(obj, HttpStatus.CREATED);
 

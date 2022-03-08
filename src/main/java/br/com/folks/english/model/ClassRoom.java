@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +28,8 @@ public class ClassRoom implements Serializable {
     @Enumerated(EnumType.STRING)
     private Days days;
 
+    @NotEmpty(message = "A hora não pode ser vazia")
+    @NotBlank(message = "a hora deve ser preenchida!")
     private String hour;
 
     @ManyToOne

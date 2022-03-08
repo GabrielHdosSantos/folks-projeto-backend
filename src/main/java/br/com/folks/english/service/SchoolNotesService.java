@@ -1,5 +1,6 @@
 package br.com.folks.english.service;
 
+import br.com.folks.english.dto.SchoolNotesDto;
 import br.com.folks.english.model.SchoolNotes;
 import br.com.folks.english.model.Student;
 import br.com.folks.english.repo.SchoolNotesRepo;
@@ -44,8 +45,8 @@ public class SchoolNotesService {
 
     }
 
-    public List<SchoolNotes> findStudentNotes(Long id){
-        List<SchoolNotes> notes = repo.findByStudent_Id(id);
+    public List<SchoolNotesDto> findStudentNotes(Long id){
+        List<SchoolNotesDto> notes = repo.findStudent_nameAndValueByStudent_Id(id);
 
         return notes;
     }
